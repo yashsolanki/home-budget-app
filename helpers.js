@@ -1,3 +1,7 @@
+// Wait For Some Random Amount Of Time
+export const wait = () =>
+  new Promise((res) => setTimeout(res, Math.random() * 2000));
+
 // Generate Random Color
 const generateRandomColor = () => {
   const existingBudgetLength = fetchData("budgets")?.length ?? 0;
@@ -16,7 +20,7 @@ export const createBudget = ({ name, amount }) => {
     name,
     createdAt: Date.now(),
     amount: +amount,
-    color: generateRandomColor()
+    color: generateRandomColor(),
   };
   const existingBudgets = fetchData("budgets") ?? [];
   return localStorage.setItem(
