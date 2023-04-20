@@ -26,7 +26,6 @@ export const dashboardAction = async ({ request }) => {
   await wait();
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
-  console.log(_action, values);
 
   // New User Submission
   if (_action === "newUser") {

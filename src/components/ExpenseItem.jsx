@@ -14,7 +14,6 @@ const ExpenseItem = ({ expense, showBudget }) => {
     key: "id",
     value: expense.budgetId,
   })[0];
-  console.log(budget);
 
   return (
     <>

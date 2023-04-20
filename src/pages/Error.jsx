@@ -5,7 +5,6 @@ import { Link, useNavigate, useRouteError } from "react-router-dom";
 const Error = () => {
   const error = useRouteError();
   const navigate = useNavigate();
-  console.log(error);
 
   return (
     <div className="error">
