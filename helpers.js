@@ -1,6 +1,6 @@
 // Wait For Some Random Amount Of Time
 export const wait = () =>
-  new Promise((res) => setTimeout(res, Math.random() * 2000));
+  new Promise((res) => setTimeout(res, Math.random() * 700));
 
 // Generate Random Color
 const generateRandomColor = () => {
@@ -73,5 +73,10 @@ export const formatCurrency = (amount) => {
   return amount.toLocaleString(undefined, {
     style: "currency",
     currency: "INR",
+    minimumFractionDigits: 0,
   });
 };
+
+// Format Date
+export const formatDateToLocaleString = (epoch) =>
+  new Date(epoch).toLocaleDateString();
