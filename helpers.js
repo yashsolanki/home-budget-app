@@ -13,6 +13,22 @@ export const fetchData = (key) => {
   return JSON.parse(localStorage.getItem(key));
 };
 
+// Get All Items From LocalStorage
+export const getAllMatchingItems = ({ category, key, value }) => {
+  const data = fetchData(category) ?? [];
+  return data.filter((item) => item[key] === value);
+};
+
+// Delete Item From LocalStorage
+export const deleteItem = ({ key, id }) => {
+  const existingData = fetchData(key);
+  if (id) {
+    const newData = existingData.filter((item) => item.id !== id);
+    return localStorage.setItem(key, JSON.stringify(newData));
+  }
+  return localStorage.removeItem(key);
+};
+
 // Create Budget
 export const createBudget = ({ name, amount }) => {
   const newBudget = {
@@ -43,11 +59,6 @@ export const createExpense = ({ name, amount, budgetId }) => {
     "expenses",
     JSON.stringify([...existingExpenses, newExpense])
   );
-};
-
-// Delete Item
-export const deleteItem = ({ key }) => {
-  return localStorage.removeItem(key);
 };
 
 // Total Spent By Budget
