@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { createBudget, createExpense, fetchData, wait } from "../../helpers";
 import Intro from "../components/Intro";
 import { toast } from "react-toastify";
@@ -7,7 +7,7 @@ import AddExpenseForm from "../components/AddExpenseForm";
 import BudgetItem from "../components/BudgetItem";
 import Table from "../components/Table";
 
-// Loader
+// Dashboard Loader
 export const dashboardLoader = () => {
   const userName = fetchData("userName");
   const budgets = fetchData("budgets");
@@ -15,7 +15,7 @@ export const dashboardLoader = () => {
   return { userName, budgets, expenses };
 };
 
-// Action
+// Dashboard Action
 export const dashboardAction = async ({ request }) => {
   await wait();
   const data = await request.formData();
@@ -83,10 +83,15 @@ const Dashboard = () => {
                   <div className="grid-md">
                     <h2>Recent Expenses</h2>
                     <Table
-                      expenses={expenses.sort(
-                        (a, b) => b.createdAt - a.createdAt
-                      )}
+                      expenses={expenses
+                        .sort((a, b) => b.createdAt - a.createdAt)
+                        .slice(0, 8)}
                     />
+                    {expenses.length > 8 && (
+                      <Link to="expenses" className="btn btn--dark">
+                        View all expenses
+                      </Link>
+                    )}
                   </div>
                 )}
               </div>
